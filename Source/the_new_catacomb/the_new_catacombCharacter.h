@@ -4,33 +4,39 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CableComponent.h"
 #include "the_new_catacombCharacter.generated.h"
 
 class UInputComponent;
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class Athe_new_catacombCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** First person camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* FirstPersonCameraComponent;
+		/** First person camera */
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UCameraComponent* FirstPersonCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+		class UCableComponent* TheseusString;
 
 public:
 	Athe_new_catacombCharacter();
+
+	void AttachRope();
 
 protected:
 	virtual void BeginPlay();
 
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseTurnRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
-	float BaseLookUpRate;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+		float BaseLookUpRate;
 
 protected:
 
@@ -51,7 +57,7 @@ protected:
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
-	
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
@@ -62,4 +68,3 @@ public:
 	FORCEINLINE class UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
 };
-
