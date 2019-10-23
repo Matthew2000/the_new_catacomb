@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CableComponent.h"
 #include "the_new_catacombCharacter.generated.h"
 
 class UInputComponent;
@@ -17,8 +18,13 @@ class Athe_new_catacombCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
 
+	UPROPERTY(VisibleAnywhere)
+	class UCableComponent* TheseusString;
+
 public:
 	Athe_new_catacombCharacter();
+
+	void AttachRope();
 
 protected:
 	virtual void BeginPlay();
