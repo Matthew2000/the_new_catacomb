@@ -29,6 +29,8 @@ public:
 protected:
 	virtual void BeginPlay();
 
+	virtual void Tick(float DeltaSeconds);
+
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
@@ -57,6 +59,32 @@ protected:
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	 */
 	void LookUpAtRate(float Rate);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float Stamina = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float Sanity = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float SanityDecrement = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float StaminaDecrement = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float SanityIncrement = 1.f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float CurrentLightLevel = 0.f;
+
+	// The level of light for when the player's sanity will start to increase
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float PositiveLightLevel = 60.f;
+
+	// The level of light for when the player's sanity will start to decrease
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float NegativeLightLevel = 40.f;
 
 protected:
 	// APawn interface

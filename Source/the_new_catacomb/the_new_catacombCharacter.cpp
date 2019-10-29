@@ -18,6 +18,9 @@ DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 Athe_new_catacombCharacter::Athe_new_catacombCharacter()
 {
+
+	PrimaryActorTick.bCanEverTick = true;
+
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 
@@ -57,6 +60,21 @@ void Athe_new_catacombCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+}
+
+void Athe_new_catacombCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	Stamina -= StaminaDecrement * DeltaSeconds;
+
+	if (CurrentLightLevel <= NegativeLightLevel) {
+		Sanity -= SanityDecrement * DeltaSeconds;
+	}
+
+	if (CurrentLightLevel >= PositiveLightLevel) {
+		Sanity += SanityIncrement * DeltaSeconds;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
