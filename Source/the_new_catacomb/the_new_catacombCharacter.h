@@ -60,36 +60,11 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
-	/*
-	All stat related values are intended to be precentages so they are clamped between 0 and 100
-	*/
-
-	UFUNCTION(BlueprintSetter)
-		void SetSanity(float newSanity);
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float Stamina = 100.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter=SetSanity, Category = Stats, meta = (ClampMin = "0.0"))
-		float Sanity = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
-		float MaxSanity = 100.f;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
-		float OilLevel = 100.f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
-		int32 Food = 1;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
-		int32 Water = 2;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
-		int32 Matches = 5;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
-		int32 Keys = 0;
+		float Sanity = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float SanityDecrement = 1.f;
@@ -100,8 +75,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float SanityIncrement = 1.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
-		bool InLight = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float CurrentLightLevel = 0.f;
+
+	// The level of light for when the player's sanity will start to increase
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float PositiveLightLevel = 60.f;
+
+	// The level of light for when the player's sanity will start to decrease
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+		float NegativeLightLevel = 40.f;
 
 protected:
 	// APawn interface

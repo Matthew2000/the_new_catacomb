@@ -8,11 +8,8 @@
 #include "GameFramework/InputSettings.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "Runtime/Engine/Classes/Engine/Engine.h"
-
-// defines macros for printing text to the screen
-#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,text)
-#define printFString(text, fstring) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT(text), fstring))
+#include "MotionControllerComponent.h"
+#include "XRMotionControllerBase.h" // for FXRMotionControllerBase::RightHandSourceId
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -71,11 +68,11 @@ void Athe_new_catacombCharacter::Tick(float DeltaSeconds)
 
 	Stamina -= StaminaDecrement * DeltaSeconds;
 
-	if (!InLight) {
+	if (CurrentLightLevel <= NegativeLightLevel) {
 		Sanity -= SanityDecrement * DeltaSeconds;
 	}
 
-	if (InLight) {
+	if (CurrentLightLevel >= PositiveLightLevel) {
 		Sanity += SanityIncrement * DeltaSeconds;
 	}
 }
@@ -133,9 +130,4 @@ void Athe_new_catacombCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
-}
-
-void Athe_new_catacombCharacter::SetSanity(float newSanity)
-{
-	Sanity = FMath::Clamp(newSanity, 0.f, MaxSanity);
 }
