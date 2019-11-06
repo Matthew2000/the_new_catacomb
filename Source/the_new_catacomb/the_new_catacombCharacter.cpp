@@ -36,27 +36,6 @@ Athe_new_catacombCharacter::Athe_new_catacombCharacter()
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
-
-	// Create and set default values for Thesues String
-	TheseusString = CreateDefaultSubobject<UCableComponent>(TEXT("Cable component"));
-	TheseusString->SetupAttachment(this->GetRootComponent());
-	TheseusString->RelativeLocation = FVector(0.f, 0.f, -95.f);
-	TheseusString->CableLength = 2000;
-	TheseusString->NumSegments = 300;
-	TheseusString->bEnableStiffness = true;
-	TheseusString->bEnableCollision = true;
-	TheseusString->SolverIterations = 1;
-	TheseusString->SubstepTime = 0.005;
-	TheseusString->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
-	TheseusString->CableGravityScale = 1;
-	TheseusString->CableWidth = 3;
-	TheseusString->bHiddenInGame = true;
-}
-
-void Athe_new_catacombCharacter::AttachRope()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Rope attached"));
-	TheseusString->bHiddenInGame = false;
 }
 
 void Athe_new_catacombCharacter::BeginPlay()
