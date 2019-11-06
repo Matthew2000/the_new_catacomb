@@ -27,6 +27,8 @@ protected:
 	virtual void Tick(float DeltaSeconds);
 
 public:
+	
+	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		float BaseTurnRate;
@@ -58,10 +60,18 @@ protected:
 	/*
 	All stat related values are intended to be precentages so they are clamped between 0 and 100
 	*/
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Character")
+		void GameOver();
+
+	UFUNCTION()
+		void CheckForGameOver(const float Stamina, const float Sanity);
 
 	UFUNCTION(BlueprintSetter)
 		void SetSanity(float newSanity);
 
+	UPROPERTY()
+		bool GameOverTriggered = false;		//if this bool does not exist, then the game over event will repeat itself on tick
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float Stamina = 100.f;
 
@@ -100,6 +110,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 		bool InLight = false;
+
 
 protected:
 	// APawn interface
