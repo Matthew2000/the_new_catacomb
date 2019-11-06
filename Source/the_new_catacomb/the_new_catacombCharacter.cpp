@@ -70,15 +70,22 @@ void Athe_new_catacombCharacter::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	Stamina -= StaminaDecrement * DeltaSeconds;
-
 	if (!InLight) {
 		Sanity -= SanityDecrement * DeltaSeconds;
 	}
-
 	if (InLight) {
 		Sanity += SanityIncrement * DeltaSeconds;
 	}
+	CheckForGameOver(Stamina, Sanity);
 }
+
+void Athe_new_catacombCharacter::CheckForGameOver(const float Stamina, const float Sanity) {
+	if ((Sanity <= 0.0 || Stamina <= 0.0) && GameOverTriggered == false) {
+		GameOverTriggered = true;
+		GameOver();
+	}
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -139,3 +146,4 @@ void Athe_new_catacombCharacter::SetSanity(float newSanity)
 {
 	Sanity = FMath::Clamp(newSanity, 0.f, MaxSanity);
 }
+
