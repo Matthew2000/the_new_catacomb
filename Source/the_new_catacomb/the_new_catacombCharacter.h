@@ -18,13 +18,8 @@ class Athe_new_catacombCharacter : public ACharacter
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* FirstPersonCameraComponent;
 
-	UPROPERTY(VisibleAnywhere)
-		class UCableComponent* TheseusString;
-
 public:
 	Athe_new_catacombCharacter();
-
-	void AttachRope();
 
 protected:
 	virtual void BeginPlay();
@@ -78,7 +73,7 @@ protected:
 		bool GameOverTriggered = false;		//if this bool does not exist, then the game over event will repeat itself on tick
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
-		float Stamina = 20.f;
+		float Stamina = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter=SetSanity, Category = Stats, meta = (ClampMin = "0.0"))
 		float Sanity = 100.f;
@@ -100,6 +95,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
 		int32 Keys = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+		TArray<FText> Notes;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float SanityDecrement = 1.f;
