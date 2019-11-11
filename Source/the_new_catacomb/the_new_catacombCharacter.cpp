@@ -123,6 +123,43 @@ void Athe_new_catacombCharacter::LookUpAtRate(float Rate)
 
 void Athe_new_catacombCharacter::SetSanity(float newSanity)
 {
-	Sanity = FMath::Clamp(newSanity, 0.f, MaxSanity);
+	Sanity = FMath::Clamp(newSanity, 0.f, 100.f);
 }
+
+void Athe_new_catacombCharacter::SetStamina(float newStamina)
+{
+	Stamina = FMath::Clamp(newStamina, 0.f, MaxStamina);
+}
+
+void Athe_new_catacombCharacter::AddStamina(float value) 
+{
+	Stamina += value;
+	Stamina = FMath::Clamp(Stamina, 0.f, 100.f);
+}
+void Athe_new_catacombCharacter::AddSanity(float value) 
+{
+	Sanity += value;
+	Sanity = FMath::Clamp(Sanity, 0.f, MaxSanity);
+}
+
+
+void Athe_new_catacombCharacter::Rest()
+{
+	if (Food >= 1 && Water >= 1) 
+	{
+		Food--;
+		Water--;
+	}
+	else 
+	{
+		if (Food >= 1) Food--;
+		if (Water >= 1) Water--;
+		MaxStamina -= StaminaPenalty;
+
+	}
+	SetStamina(MaxStamina);
+	SetSanity(100.f);
+
+}
+
 

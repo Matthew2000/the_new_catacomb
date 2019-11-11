@@ -69,17 +69,35 @@ protected:
 	UFUNCTION(BlueprintSetter)
 		void SetSanity(float newSanity);
 
+	UFUNCTION(BlueprintSetter)
+		void SetStamina(float newStamina);
+
+	UFUNCTION(BlueprintCallable)
+		void AddStamina(float value);
+
+	UFUNCTION(BlueprintCallable)
+		void AddSanity(float value);
+	
+	UFUNCTION(BlueprintCallable)
+		void Rest();
+
 	UPROPERTY()
 		bool GameOverTriggered = false;		//if this bool does not exist, then the game over event will repeat itself on tick
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float Stamina = 100.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter=SetSanity, Category = Stats, meta = (ClampMin = "0.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
 		float Sanity = 100.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0"))
 		float MaxSanity = 100.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter = SetStamina, Category = Stats, meta = (ClampMin = "0.0"))
+		float MaxStamina = 100.f;
+
+	UPROPERTY(BlueprintReadWrite)	//not sure if this is right
+		float StaminaPenalty = 10.f;	//when the player doesn't have correct food/water on sleep this penality will be applied.
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats, meta = (ClampMin = "0.0", ClampMax = "100.0"))
 		float OilLevel = 100.f;
