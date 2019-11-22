@@ -51,9 +51,11 @@ void Athe_new_catacombCharacter::Tick(float DeltaSeconds)
 	Stamina -= StaminaDecrement * DeltaSeconds;
 	if (!InLight) {
 		Sanity -= SanityDecrement * DeltaSeconds;
+		Sanity = FMath::Clamp(Sanity, 0.f, MaxSanity);
 	}
 	if (InLight) {
 		Sanity += SanityIncrement * DeltaSeconds;
+		Sanity = FMath::Clamp(Sanity, 0.f, MaxSanity);
 	}
 	CheckForGameOver(Stamina, Sanity);
 }
@@ -123,7 +125,7 @@ void Athe_new_catacombCharacter::LookUpAtRate(float Rate)
 
 void Athe_new_catacombCharacter::SetSanity(float newSanity)
 {
-	Sanity = FMath::Clamp(newSanity, 0.f, 100.f);
+	Sanity = FMath::Clamp(newSanity, 0.f, MaxSanity);
 }
 
 void Athe_new_catacombCharacter::SetStamina(float newStamina)
@@ -134,7 +136,7 @@ void Athe_new_catacombCharacter::SetStamina(float newStamina)
 void Athe_new_catacombCharacter::AddStamina(float value) 
 {
 	Stamina += value;
-	Stamina = FMath::Clamp(Stamina, 0.f, 100.f);
+	Stamina = FMath::Clamp(Stamina, 0.f, MaxStamina);
 }
 void Athe_new_catacombCharacter::AddSanity(float value) 
 {
@@ -158,7 +160,7 @@ void Athe_new_catacombCharacter::Rest()
 
 	}
 	SetStamina(MaxStamina);
-	SetSanity(100.f);
+	SetSanity(MaxSanity);
 
 }
 
