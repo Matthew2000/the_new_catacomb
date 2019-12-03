@@ -6,6 +6,8 @@ Content/UI_Kit
 Content/SurvivalProps
 Content/Infinity_Blade_Assets
 
+Content/SoulCave
+
 
 
 # Visual Studio 2015 user specific files
@@ -85,3 +87,5 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+Content/SoulCave/
